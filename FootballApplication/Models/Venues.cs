@@ -20,8 +20,14 @@ namespace FootballApplication.Models
     }
     public class VenueDto
     {
+        public VenueDto()
+        {
+            Teams = new List<TeamDto>();
+        }
         public int VenueID { get; set; }
         public string VenueName { get; set; }
         public string VenueLocation { get; set; }
+
+        public ICollection<TeamDto> Teams { get; set; }
     }
 }

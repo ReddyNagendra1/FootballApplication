@@ -39,8 +39,6 @@ namespace FootballApplication.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
             VenueDto selectedVenue = response.Content.ReadAsAsync<VenueDto>().Result;
 
-
-
             ViewModel.Venue = selectedVenue;
 
             url = "TeamData/ListTeams";
@@ -50,7 +48,6 @@ namespace FootballApplication.Controllers
             ViewModel.Teams = teams;
             return View(ViewModel);
         }
-
 
         // GET: Venue/New
         public ActionResult New()
@@ -78,7 +75,6 @@ namespace FootballApplication.Controllers
             VenueDto venueDto = response.Content.ReadAsAsync<VenueDto>().Result;
             return View(venueDto);
         }
-        
 
         // POST: Venue/Update/5
         [HttpPost]
@@ -128,7 +124,7 @@ namespace FootballApplication.Controllers
             HttpResponseMessage response = client.GetAsync(url).Result;
             VenueDto venueDto = response.Content.ReadAsAsync<VenueDto>().Result;
 
-            string teamUrl = "https://localhost:44338/api/TeamData/ListTeams";
+            string teamUrl = "TeamData/ListTeams";
             HttpResponseMessage teamResponse = client.GetAsync(teamUrl).Result;
             IEnumerable<TeamDto> allTeams = teamResponse.Content.ReadAsAsync<IEnumerable<TeamDto>>().Result;
 
