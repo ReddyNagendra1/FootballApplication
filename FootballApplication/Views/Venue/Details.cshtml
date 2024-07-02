@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Details";
 }
+
 <nav>
     <ul>
         <li><a href="/Venue/List">Go back to list</a></li>
@@ -10,41 +11,12 @@
         <li><a style="color:#ab2020;" href="/Venue/DeleteConfirm/@Model.Venue.VenueID">Delete</a></li>
     </ul>
 </nav>
+
 <h2>@Model.Venue.VenueName</h2>
 <div>Location: @Model.Venue.VenueLocation</div>
 <div>
-    <h4>Teams at this venue:</h4>
-    @if (Model.Venue.Teams != null && Model.Venue.Teams.Any())
+    @foreach (var team in Model.Teams)
     {
-        <ul>
-            @foreach (var team in Model.Venue.Teams)
-            {
-                <li>
-                    @team.TeamName
-                    <form action="/Venue/RemoveTeamFromVenue" method="post">
-                        <input type="hidden" name="venueId" value="@Model.Venue.VenueID" />
-                        <input type="hidden" name="teamId" value="@team.TeamID" />
-                        <button type="submit" class="btn btn-danger">Remove</button>
-                    </form>
-                </li>
-            }
-        </ul>
-        }
-else
-{
-    <p>No teams associated with this venue.</p>
-}
-    </div>
-<div>
-    <h4>Add a team to this venue</h4>
-    <form action="/Venue/AddTeamToVenue" method="post">
-        <input type="hidden" name="venueId" value="@Model.Venue.VenueID" />
-        <select name="teamId" class="form-control">
-            @foreach (var team in Model.Teams)
-            {
-                <option value="@team.TeamID">@team.TeamName</option>
-            }
-        </select>
-        <button type="submit" class="btn btn-primary">Add Team</button>
-    </form>
+        <h2><a href="/Team/Details/@team.TeamID">@team.TeamName</a></h2>
+    }
 </div>
